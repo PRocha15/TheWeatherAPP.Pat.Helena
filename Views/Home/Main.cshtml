@@ -1,0 +1,27 @@
+﻿@model Weather;
+{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    <h1 class="display-4">Bem-vindo à melhor aplicaçao de Meteorologia!</h1>
+    <br />
+    <div>
+        @using (Html.BeginForm("WeatherAPIForm", "Home", FormMethod.Post)) // criar formulario
+        {
+            <table class= "table table-bordered table-hover table-striped table-responsive">
+                <tr>
+                    <td> Location Name: </td>
+                     <td> @Html.TextBoxFor(wm => wm.locationName,new  @* metodos para desenhar os inputs html. fazemos @html. --> vai mapear os atributos k quero 
+                         new --> form control *@
+                     { @class = "form-control"} ) </td>
+                </tr>
+                <tr>
+                    <td colspan = "2">
+                        <button type ="submit" class = "btn btn-primary"> Pesquisar </button>
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>
+   
