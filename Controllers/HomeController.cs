@@ -31,7 +31,7 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
             }
             else
             {
-                ViewData["auth_error"] = "Por favor introduza as suas credencias";
+                ViewData["auth_error"] = "Por favor introduza as suas credenciais";
                 return View("Index");
 
             }
@@ -45,10 +45,28 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
 
         public async Task<ActionResult> WeatherAPIForm(Weather wm)
         {
+
+            //Check the intended period
+            string API_URL;
+            switch (wm.Period)
+            {
+                case "Today":
+                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/today?unitGroup=metric&key=KT998THUCKM395HUR6LLQRWYH&contentType=json";
+                    break;
+                case "Tomorrow":
+                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/tomorrow?unitGroup=metric&key=KT998THUCKM395HUR6LLQRWYH&contentType=json";
+                    break;
+                case "Next 7 days":
+                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/next7days?unitGroup=metric&key=KT998THUCKM395HUR6LLQRWYH&contentType=json";
+                    break;
+                default:
+                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/today?unitGroup=metric&key=KT998THUCKM395HUR6LLQRWYH&contentType=json";
+                    break;
+            }
             //HTTP request CALL API
 
             var client = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "?key=9ML3SDK9ZECE68356PEA4G45V");
+            var request = new HttpRequestMessage(HttpMethod.Get, API_URL);
             var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode(); //método para tratamento de exceções
 
@@ -60,11 +78,13 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
             {
                 results.Add("Forecast for date " + day.datetime);
                 results.Add("General conditions will be: " + day.description);
+                results.Add(" The high temperature will be: " + day.tempmax);
+                results.Add(" The low temperature will be: " + day.tempmin);
                 results.Add(" ");
             }
 
             ViewBag.Output = results;
-            return View("Main", wm);
+            return View("Results", wm);
 
             ViewBag.Output = body;
 
