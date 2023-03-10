@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Net.Mime;
 using TheWeatherAPP.Pat.Helena.Models;
 
 namespace TheWeatherAPP.Pat.Helena.Controllers
@@ -57,11 +59,11 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
                     API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/tomorrow?unitGroup=metric&key=KT998THUCKM395HUR6LLQRWYH&contentType=json";
                     break;
                 case "Next 7 days":
-                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/next7days?unitGroup=metric&key=KT998THUCKM395HUR6LLQRWYH&contentType=json";
+                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/next7days?unitGroup=metric&key=9ML3SDK9ZECE68356PEA4G45V&contentType=json";
                     break;
-                default:
-                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/today?unitGroup=metric&key=KT998THUCKM395HUR6LLQRWYH&contentType=json";
-                    break;
+                default: //next 15 days
+                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/?unitGroup=metric&key=9ML3SDK9ZECE68356PEA4G45V&contentType=json";
+                    break;              
             }
             //HTTP request CALL API
 
@@ -88,7 +90,7 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
 
             ViewBag.Output = body;
 
-            return View("Main");
+            return View("Results");
 
         }
 
