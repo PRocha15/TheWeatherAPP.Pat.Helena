@@ -69,10 +69,10 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
 
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get, API_URL);
-            var response = await client.SendAsync(request);
+           var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode(); //método para tratamento de exceções
-
             var body = await response.Content.ReadAsStringAsync();
+            string result = " ";
             dynamic weather = JsonConvert.DeserializeObject(body);
             List<string> results = new List<string>();
 
@@ -82,7 +82,12 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
                 results.Add("General conditions will be: " + day.description);
                 results.Add(" The high temperature will be: " + day.tempmax);
                 results.Add(" The low temperature will be: " + day.tempmin);
+                results.Add("The sunrise hour will be: " + day.sunrise);
+                results.Add("The sunset hour will be: " + day.sunset);
+                results.Add("Weather warnings for today: " + day.alert);
                 results.Add(" ");
+
+                
             }
 
             ViewBag.Output = results;
