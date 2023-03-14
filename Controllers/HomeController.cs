@@ -28,8 +28,10 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
         public IActionResult Validation(string email, string password)
         {
             if (email == "superMan@super.com" && password == "123")
-            {
-                return View("Main");
+            {   
+                Weather wm = new Weather();
+                wm.period = "Today";
+                return View("Main", wm);
             }
             else
             {
@@ -84,14 +86,50 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
                 results.Add(" The low temperature will be: " + day.tempmin);
                 results.Add("The sunrise hour will be: " + day.sunrise);
                 results.Add("The sunset hour will be: " + day.sunset);
-                results.Add("Weather warnings for today: " + day.alert);
+                results.Add("estacoes: " + day.stations);
+                results.Add("alertas: " + day.alerts);
+               // results.Add("Weather warnings for today: " + day.alerts);
                 results.Add(" ");
 
-                
             }
 
-            ViewBag.Output = results;
+            //dynamic estacao = JsonConvert.DeserializeObject(body);
+            //List<string> stationsId = new List<string>();
+            //foreach(var i in estacao.days)
+            //{
+            //    stationsId.Add("A estaçao é " + i.stations);
+            //}
+
+            //dynamic alert = JsonConvert.DeserializeObject(body);
+            //List<string> WeatherAlerts = new List<string>();
+            //foreach(var i in alert.days)
+            //{
+            //    WeatherAlerts.Add("Alerta para hoje: " + i.alerts);
+            //}
+
+
+
+
+            // dynamic alert = JsonConvert.DeserializeObject(body);
+
+
+            // stationsIds = weather.stationsIds["stations"];
+            // results.Add("Weather stations: " + weather.stations);
+
+            //dynamic estacao = JsonConvert.DeserializeObject(body);
+            //List<string> stationsIds = new List<string>();
+
+            //foreach( var station in estacao.days)
+            //{
+            //        stationsIds.Add("Weather statiuons: " + station.stations);
+            //}
+
+            ViewBag.Output = results; 
+         
+            //ViewBag.Output = stationsId;
+           // ViewBag.Output = WeatherAlerts;
             return View("Results", wm);
+
 
             ViewBag.Output = body;
 

@@ -6,6 +6,7 @@
         public string period;
         public string alerts;
 
+
         public Weather() 
         { }
 
