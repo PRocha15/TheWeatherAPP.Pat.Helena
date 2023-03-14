@@ -86,45 +86,28 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
                 results.Add(" The low temperature will be: " + day.tempmin);
                 results.Add("The sunrise hour will be: " + day.sunrise);
                 results.Add("The sunset hour will be: " + day.sunset);
-                results.Add("estacoes: " + day.stations);
-                results.Add("alertas: " + day.alerts);
+                results.Add("As estações da cidade são: " + day.stations);
+               // results.Add("alertas: " + body.alerts);
                // results.Add("Weather warnings for today: " + day.alerts);
                 results.Add(" ");
 
             }
 
-            //dynamic estacao = JsonConvert.DeserializeObject(body);
-            //List<string> stationsId = new List<string>();
-            //foreach(var i in estacao.days)
-            //{
-            //    stationsId.Add("A estaçao é " + i.stations);
-            //}
-
+          
             //dynamic alert = JsonConvert.DeserializeObject(body);
             //List<string> WeatherAlerts = new List<string>();
-            //foreach(var i in alert.days)
-            //{
-            //    WeatherAlerts.Add("Alerta para hoje: " + i.alerts);
-            //}
+            //foreach (var day in alert.days)
+            //{ 
+            //    if(alert[day] != null)
+            //    {
+            //         WeatherAlerts.Add("Alerta para hoje: " + day.alerts);
+            //    }
+                
+            //   }
 
 
-
-
-            // dynamic alert = JsonConvert.DeserializeObject(body);
-
-
-            // stationsIds = weather.stationsIds["stations"];
-            // results.Add("Weather stations: " + weather.stations);
-
-            //dynamic estacao = JsonConvert.DeserializeObject(body);
-            //List<string> stationsIds = new List<string>();
-
-            //foreach( var station in estacao.days)
-            //{
-            //        stationsIds.Add("Weather statiuons: " + station.stations);
-            //}
-
-            ViewBag.Output = results; 
+        ViewBag.Output = results;
+           //ViewBag.Output = WeatherAlerts;
          
             //ViewBag.Output = stationsId;
            // ViewBag.Output = WeatherAlerts;
