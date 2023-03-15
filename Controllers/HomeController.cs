@@ -72,15 +72,13 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
 
             var body = await response.Content.ReadAsStringAsync();
             dynamic weather = JsonConvert.DeserializeObject(body);
-            List<string> results = new List<string>();
+            List<WeatherDay> results = new List<WeatherDay>();
 
             foreach (var day in weather.days)
-            {
-                results.Add("Forecast for date " + day.datetime);
-                results.Add("General conditions will be: " + day.description);
-                results.Add(" The high temperature will be: " + day.tempmax);
-                results.Add(" The low temperature will be: " + day.tempmin);
-                results.Add(" ");
+            { 
+                var weatherDay = new WeatherDay(day);
+                results.Add(weatherDay);
+               
             }
 
             ViewBag.Output = results;

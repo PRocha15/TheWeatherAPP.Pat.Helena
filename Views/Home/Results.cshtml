@@ -7,14 +7,41 @@
     <h1 class="display-4">Weather Results</h1>
     <h2>@Model.LocationName</h2>
     </br>
+    @{
+        var data = ViewBag.Output;
+    }
     <div>
         <h4 style="color:cornflowerblue">
             <b>
-                @foreach (string data in ViewBag.Output)
-                {
-                    @data
-                    <br />
-                }
+               
+                <div class="mainTable">
+                    @foreach (WeatherDay weatherDay in data)
+                    {
+                        <div>
+                        <p>
+                            @weatherDay.date</p>
+                        <p>@weatherDay.conditions</p>
+                        <p>@weatherDay.temperature</p>
+                        
+
+                        <table>
+                            @foreach (KeyValuePair<string, string> row in weatherDay.table)
+                            {
+                                <tr>
+                                    <td style="background-color:aqua">
+                                        @row.Key
+                                    </td>
+                                    <td>
+                                        @row.Value
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                        </div>
+                        
+                    }
+                </div>
+
             </b>
         </h4>
     </div>
