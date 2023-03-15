@@ -74,9 +74,11 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
            var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode(); //método para tratamento de exceções
             var body = await response.Content.ReadAsStringAsync();
-            string result = " ";
+           
+            //string result = "";
             dynamic weather = JsonConvert.DeserializeObject(body);
             List<string> results = new List<string>();
+           
 
             foreach (var day in weather.days)
             {
@@ -86,14 +88,32 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
                 results.Add(" The low temperature will be: " + day.tempmin);
                 results.Add("The sunrise hour will be: " + day.sunrise);
                 results.Add("The sunset hour will be: " + day.sunset);
-                results.Add("As estações da cidade são: " + day.stations);
+               // results.Add("As estações da cidade são: " + day.stations);
                // results.Add("alertas: " + body.alerts);
                // results.Add("Weather warnings for today: " + day.alerts);
                 results.Add(" ");
+            }
+
+            //informação sobre as estaçoes de cada localização;
+            List<string> stationsIds = new List<string>();
+
+            results.Add("****************************");
+            results.Add("Here is the information about the associated stations for this location: ");
+            var weatherStations = weather.currentConditions["stations"];
+            //string stationDetails = "";
+            
+            foreach(string stationId in weatherStations)
+            {
+                results.Add("Station ID: " + weather.stations[stationId].id);
+                results.Add("Stations ID: " + weather.stations[stationId].distance);
+                results.Add("Stations ID: " + weather.stations[stationId].name);
 
             }
 
-          
+
+
+
+
             //dynamic alert = JsonConvert.DeserializeObject(body);
             //List<string> WeatherAlerts = new List<string>();
             //foreach (var day in alert.days)
@@ -102,11 +122,11 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
             //    {
             //         WeatherAlerts.Add("Alerta para hoje: " + day.alerts);
             //    }
-                
+
             //   }
 
 
-        ViewBag.Output = results;
+            ViewBag.Output = results;
            //ViewBag.Output = WeatherAlerts;
          
             //ViewBag.Output = stationsId;
