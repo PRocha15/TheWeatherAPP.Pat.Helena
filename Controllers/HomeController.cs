@@ -55,7 +55,7 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
             switch (wm.Period)
             {
                 case "Today":
-                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/today?unitGroup=metric&key=KT998THUCKM395HUR6LLQRWYH&contentType=json";
+                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/today?unitGroup=metric&key=9ML3SDK9ZECE68356PEA4G45V&contentType=json";
                     break;
                 case "Tomorrow":
                     API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/tomorrow?unitGroup=metric&key=KT998THUCKM395HUR6LLQRWYH&contentType=json";
@@ -64,8 +64,8 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
                     API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/next7days?unitGroup=metric&key=9ML3SDK9ZECE68356PEA4G45V&contentType=json";
                     break;
                 default: //next 15 days
-                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/?unitGroup=metric&key=9ML3SDK9ZECE68356PEA4G45V&contentType=json";
-                    break;              
+                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "?unitGroup=metric&key=9ML3SDK9ZECE68356PEA4G45V&contentType=json";
+                    break;
             }
             //HTTP request CALL API
 
@@ -88,9 +88,11 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
                 results.Add(" The low temperature will be: " + day.tempmin);
                 results.Add("The sunrise hour will be: " + day.sunrise);
                 results.Add("The sunset hour will be: " + day.sunset);
-               // results.Add("As estações da cidade são: " + day.stations);
-               // results.Add("alertas: " + body.alerts);
-               // results.Add("Weather warnings for today: " + day.alerts);
+                results.Add("The UV radiation will be: " + day.uvindex);
+
+                // results.Add("As estações da cidade são: " + day.stations);
+                // results.Add("alertas: " + body.alerts);
+                // results.Add("Weather warnings for today: " + day.alerts);
                 results.Add(" ");
             }
 
@@ -99,32 +101,48 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
 
             results.Add("****************************");
             results.Add("Here is the information about the associated stations for this location: ");
-            var weatherStations = weather.currentConditions["stations"];
-            //string stationDetails = "";
-            
-            foreach(string stationId in weatherStations)
-            {
-                results.Add("Station ID: " + weather.stations[stationId].id);
-                results.Add("Stations ID: " + weather.stations[stationId].distance);
-                results.Add("Stations ID: " + weather.stations[stationId].name);
 
+            var weatherStations = weather.currentConditions["stations"];
+            string stationDetails = "";
+            foreach(string stationID in weatherStations)
+
+            {
+                results.Add("Station Name: " + weather.stations[stationID].name);
+                results.Add("ID: " + weather.stations[stationID].id);
+                results.Add("Distance: " + weather.stations[stationID].distance);
+                results.Add("Latitude: " + weather.stations[stationID].latitude);
+                results.Add("Longitude: " + weather.stations[stationID].longitude);
+                results.Add("Quality: " + weather.stations[stationID].quality);
+                results.Add(" ");
+            }
+
+            //dynamic severe = JsonConvert.DeserializeObject(body);
+
+            List<string> WeatherAlerts = new List<string>();
+
+            foreach (var alert in weather)
+            {
+                if (WeatherAlerts != null)
+                {
+                    results.Add("Alerta para hoje: " + weather.alerts[0].headline);
+                }
+                break;
             }
 
 
-
-
-
-            //dynamic alert = JsonConvert.DeserializeObject(body);
+            //var weatherAlerts = weather.currentConditions["alerts"];
+            //dynamic severe = JsonConvert.DeserializeObject(body);
+            //string alertDetails = "";
             //List<string> WeatherAlerts = new List<string>();
-            //foreach (var day in alert.days)
-            //{ 
-            //    if(alert[day] != null)
+
+            //foreach (string alert in weatherAlerts.days)
+            //{
+            //    if (WeatherAlerts != null)
             //    {
-            //         WeatherAlerts.Add("Alerta para hoje: " + day.alerts);
+            //        results.Add("Alerta para hoje: " + weather.alerts[WeatherAlerts]);
             //    }
 
-            //   }
-
+            //}
 
             ViewBag.Output = results;
            //ViewBag.Output = WeatherAlerts;
@@ -134,9 +152,9 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
             return View("Results", wm);
 
 
-            ViewBag.Output = body;
+            //ViewBag.Output = body;
 
-            return View("Results");
+            //return View("Results");
 
         }
 
