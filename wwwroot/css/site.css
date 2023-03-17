@@ -14,7 +14,9 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url("/img/2background.jpg");
+    background-size: cover;
 }
 
 .mainTable{
@@ -24,7 +26,7 @@ body {
 
 .secBackground {
     height: 100%;
-    background-image: url("/img/2background.jpg");
+    
     height: auto;
     width: 100%;
     background-repeat: no-repeat;
