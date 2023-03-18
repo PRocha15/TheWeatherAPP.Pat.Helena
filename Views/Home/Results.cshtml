@@ -13,6 +13,7 @@
     <div>
         <h4 style="color:cornflowerblue">
             <b>
+
                
                 <div class="mainTable">
                     @foreach (WeatherDay weatherDay in data)
@@ -42,9 +43,21 @@
                     }
                 </div>
 
+
+                @foreach (string data in ViewBag.Output)
+                {
+
+              
+                            @data
+
+            
+                     <br />
+                }
+               
+           @*     @ViewBag.Output;*@
+
             </b>
         </h4>
     </div>
-    </br>
-
+    <br />
 </div>

@@ -5,36 +5,43 @@
 
 <div class="text-center">
     <h1 class="display-4">Bem-vindo à melhor aplicaçao de Meteorologia!</h1>
+    <hr />
     <br />
-    <div>
+   
         @using (Html.BeginForm("WeatherAPIForm", "Home", FormMethod.Post)) // criar formulario
-        {
-            <table class= "table table-bordered table-hover table-striped table-responsive">
+        { 
+          // <table class= "table table-bordered table-hover table-striped table-responsive">
                 <tr>
                     <td> Location Name: </td>
-                     <td> @Html.TextBoxFor(wm => wm.locationName,new  @* metodos para desenhar os inputs html. fazemos @html. --> vai mapear os atributos k quero 
-                         new --> form control *@
-                     { @class = "form-control"} ) </td>
-                </tr>
+                     <td> @Html.TextBoxFor(wm => wm.locationName,new   /*metodos para desenhar os inputs html. fazemos @html. --> vai mapear os atributos k quero*/ 
+                         //new --> form control *@
+                   { @class = "form-control"} ) 
+                 </td>
+               </tr>
+                 <table class= "table  table-responsive">
                  <tr>
-                    <td>Today? </td>
+                    <td>Today </td>
                     <td>@Html.RadioButtonFor(wm => wm.Period,"Today", new { @checked="checked" })</td>
                 </tr>
                 <tr>
-                    <td>Tomorrow? </td>
+                    <td>Tomorrow </td>
                     <td>@Html.RadioButtonFor(wm => wm.Period,"Tomorrow")</td>
                 </tr>
                 <tr>
-                    <td>Next 7 days? </td>
+                    <td>Next 7 days </td>
                     <td>@Html.RadioButtonFor(wm => wm.Period,"Next 7 days")</td>
                 </tr>
                 <tr>
+                    <td>Next 15 days </td>
+                    <td>@Html.RadioButtonFor(wm => wm.Period,"Next 15 days")</td>
+                </tr>
+                <tr>
                     <td colspan = "2">
-                        <button type ="submit" class = "btn btn-primary"> Pesquisar </button>
+                        <button type ="submit" class = "btn btn-primary"> Search </button>
                     </td>
                 </tr>
-            </table>
+        //</table>
         }
-    </div>
-</div>
+    
+
    
