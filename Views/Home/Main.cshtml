@@ -4,43 +4,40 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Bem-vindo à melhor aplicaçao de Meteorologia!</h1>
-    <hr />
+   
     <br />
    
         @using (Html.BeginForm("WeatherAPIForm", "Home", FormMethod.Post)) // criar formulario
-        { 
-          // <table class= "table table-bordered table-hover table-striped table-responsive">
-                <tr>
-                    <td> Location Name: </td>
-                     <td> @Html.TextBoxFor(wm => wm.locationName,new   /*metodos para desenhar os inputs html. fazemos @html. --> vai mapear os atributos k quero*/ 
-                         //new --> form control *@
-                   { @class = "form-control"} ) 
-                 </td>
-               </tr>
-                 <table class= "table  table-responsive">
-                 <tr>
-                    <td>Today </td>
-                    <td>@Html.RadioButtonFor(wm => wm.Period,"Today", new { @checked="checked" })</td>
-                </tr>
-                <tr>
-                    <td>Tomorrow </td>
-                    <td>@Html.RadioButtonFor(wm => wm.Period,"Tomorrow")</td>
-                </tr>
-                <tr>
-                    <td>Next 7 days </td>
-                    <td>@Html.RadioButtonFor(wm => wm.Period,"Next 7 days")</td>
-                </tr>
-                <tr>
-                    <td>Next 15 days </td>
-                    <td>@Html.RadioButtonFor(wm => wm.Period,"Next 15 days")</td>
-                </tr>
-                <tr>
-                    <td colspan = "2">
-                        <button type ="submit" class = "btn btn-primary"> Search </button>
-                    </td>
-                </tr>
-        //</table>
+        {
+            // search bar
+            <div class="input-group mb-3 searchBar">
+                @Html.TextBoxFor(wm => wm.locationName,new   /*metodos para desenhar os inputs html. fazemos @html. --> vai mapear os atributos k quero*/
+            //new --> form control *@
+            { @placeholder = "Weather cities", @class = "form-control", @required = "true"} )
+                <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+            </div>
+
+            // Radio buttons
+            <div class="radioButtonsGroup">
+                <div class="form-check form-check-inline radioButtonItem">
+                    @Html.RadioButtonFor(wm => wm.Period,"Today", new { @checked = "true",@class = "form-check-input"})
+                    <label class="form-check-label  text-light radioButtonsText" for="inlineRadio1">Today</label>
+                </div>
+            <div class="form-check form-check-inline radioButtonItem">
+                    @Html.RadioButtonFor(wm => wm.Period,"Tomorrow", new { @class = "form-check-input"})
+                <label class="form-check-label text-light radioButtonsText" for="inlineRadio2">Tomorrow</label>
+                </div>
+            <div class="form-check form-check-inline radioButtonItem">
+                    @Html.RadioButtonFor(wm => wm.Period,"Next 7 days", new { @class = "form-check-input"})
+                <label class="form-check-label  text-light radioButtonsText" for="inlineRadio3">Next 7 Days</label>
+                </div>
+            <div class="form-check form-check-inline radioButtonItem">
+                    @Html.RadioButtonFor(wm => wm.Period,"Next 15 days", new { @class = "form-check-input"})
+                <label class="form-check-label  text-light radioButtonsText" for="inlineRadio3">Next 15 days</label>
+                </div>
+            </div>
+        
+
         }
     
 
