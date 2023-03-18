@@ -3,10 +3,43 @@
     Layout = "~/Views/Shared/_Authentication.cshtml";
 }
 
+@*<h1 style="font-size:80px;color:darkslategray; text-orientation:upright;
+ text-indent:5px; transform:translate(20px, 80px)rotate:(-30dg); display:inline-block">Forecast Patena</h1><br />*@
+
+
+<div style="text-align: center; padding-top: 0px;border-top:5px;
+                font-size: 55px; color: white;">
+
+    <!-- Declare all the characters of text
+        one-by-one, inside span tags -->
+    <span class="f">F</span>
+    <span class="o">O</span>
+    <span class="r">R</span>
+    <span class="e">E</span>
+    <span class="c">C</span>
+    <span class="a">A</span>
+    <span class="s">S</span>
+    <span class="t">T</span>
+    <span class="space"></span>
+    <span class="p">P</span>
+    <span class="a1">A</span>
+    <span class="t1">T</span>
+    <span class="l">L</span>
+    <span class="e1">E</span>
+    <span class="n">N</span>
+    <span class="a2">A</span>
+</div>
+
+
+
+
 <main class="form-signin w-100 m-auto">
     <form asp-action="Validation">
-        <img class="mb-4" src="https://cdn-icons-png.flaticon.com/512/1610/1610215.png" width="72" height="72">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        
+        @*<h1 class="h3 mb-3 fw-normal">Please sign in</h1>*@
+
+        @*<button class="button button1">Login</button>
+        <button class="button button2">Create Account</button>*@
 
         <div class="form-floating">
             <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
@@ -17,6 +50,8 @@
             <label for="floatingPassword">Password</label>
         </div>
 
+
+
         @if (ViewData["auth_error"] != null)
         {
             <div class="alert-danger"><label>@ViewData["auth_error"]</label></div>
@@ -24,9 +59,9 @@
             <br />
         }
 
-        @* <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>*@
-        <button type="submit" class="btn btn-outline-primary">Submit</button>
-        <p class="mt-5 mb-3 text-muted">&copy; Helena de Tróia & Patrícia Rocha;  </p>
+         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+       @* <button type="submit" class="btn btn-outline-primary">Submit</button>*@
+        @*<p class="mt-5 mb-3 text-muted">&copy; Helena de Tróia & Patrícia Rocha;  </p>*@
 
     </form>
 </main>

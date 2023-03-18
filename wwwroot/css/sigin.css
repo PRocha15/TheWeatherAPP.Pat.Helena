@@ -1,34 +1,156 @@
 ﻿html,
 body {
 	height: 100%;
+
+}
+.headinG{
+	text-align:center;
+	color:green;
 }
 
 body {
-	display: flex;
-	align-items: center;
-	padding-top: 40px;
+	/*display: flex;*/
+	/*align-items: center;*/
+	padding-top: 60px;
 	padding-bottom: 40px;
-	background-color: /* #f5f5f5*/ #f0f8ff;
-
+	background-color:  #f5f5f5 #f0f8ff;
+	background-image: url("/img/back_fo.png");
+	height:auto;
+	width:100%;
+	background-repeat:no-repeat;
+	background-size:cover;
+/*	position:absolute;*/
+	position:static;
+	
 }
 
 .form-signin {
-	max-width: 330px;
+	max-width: 250px;
 	padding: 15px;
+	padding-top:150px;
+
 }
 
 	.form-signin .form-floating:focus-within {
 		z-index: 2;
+		padding-top: 50px;
+		
 	}
 
 	.form-signin input[type="email"] {
 		margin-bottom: -1px;
 		border-bottom-right-radius: 0;
 		border-bottom-left-radius: 0;
+		background-color: #808080;
 	}
 
 	.form-signin input[type="password"] {
 		margin-bottom: 10px;
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
+		background-color: #202020;
 	}
+
+/*.button {
+	border: none;
+	color: white;
+	padding: 20px 20px;
+	text-align: left;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.button1 {
+	background-color: white;
+	color: black;
+	border: 2px solid #4CAF50;
+}
+
+	.button1:hover {
+		background-color: #4CAF50;
+		color: white;
+	}
+
+.button2 {
+	background-color: white;
+	color: black;
+	border: 2px solid #008CBA;
+}
+
+	.button2:hover {
+		background-color: #008CBA;
+		color: white;
+	}*/
+
+
+.f {
+	transform: translate(20px, 85px) rotate(-30deg);
+}
+
+.o {
+	transform: translate(13px, 60px) rotate(-25deg);
+}
+
+.r {
+	transform: translate(6px, 40px) rotate(-20deg);
+}
+
+.e {
+	transform: translate(3px, 23px) rotate(-15deg);
+}
+
+.c {
+	transform: translate(2px, 14px) rotate(-10deg);
+}
+
+.a {
+	transform: translate(1px, 8px) rotate(-5deg);
+}
+
+.s {
+	transform: translate(0px, 5px) rotate(0deg);
+}
+
+.t {
+	transform: translate(-1px, 8px) rotate(5deg);
+}
+.space{
+	letter-spacing:5px;
+}
+.p {
+	transform: translate(-2px, 14px) rotate(10deg);
+}
+
+.a1 {
+	transform: translate(-3px, 25px) rotate(15deg);
+}
+
+.t1 {
+	transform: translate(-6px, 40px) rotate(20deg);
+}
+.l {
+	transform: translate(6px, 45px) rotate(25deg);
+}
+
+.e1 {
+	transform: translate(-14px, 60px) rotate(25deg);
+}
+
+.n {
+	transform: translate(-20px, 80px) rotate(30deg);
+}
+
+.a2 {
+	transform: translate(-5px, 130px) rotate(30deg);
+}
+/* An inline-block element is placed as an inline
+         element (on the same line as adjacent content), 
+         but it behaves like a block element  */
+
+span {
+	display: inline-block;
+}

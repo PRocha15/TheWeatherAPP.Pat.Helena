@@ -14,5 +14,76 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url("/img/2background.jpg");
+    background-size: cover;
+}
+
+.mainTable{
+    display:flex;
+    flex-direction:row;
+}
+
+.secBackground {
+    height: 100%;
+    
+    height: auto;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+}
+
+.searchBar {
+    margin-top: 160px;
+}
+.radioButtonsGroup {
+    margin-top:30px;
+}
+.radioButtonsText{
+    font-size: 18px;
+}
+.radioButtonItem{
+    margin-right: 25px;
+}
+
+.alertSpacing{
+    margin-bottom:50px
+}
+.accordionSpacing{
+    margin-top:30px;
+}
+.stationSpacing{
+    margin-top:100px;
+}
+.seeMoreButtonSpacing{
+    margin-left: 50px;
+}
+.dayTableKey{
+    text-align: left;
+    font-weight: 300; 
+}
+.dayTableValue{
+    text-align: right;
+}
+.dayMainTemperature{
+    font-size: 40px;
+    margin-bottom:20px;
+}
+.iconImage{
+    width: 100px;
+    margin:20px;
+}
+.cardSpacing{
+    margin:5px;
+    margin-top:20px;
+}
+.cardDate {
+    background-color: #715382;
+    color: white;
+    font-weight:600;
+    font-size:17px;
+}
+.iconSpacing{
+    height:140px;
 }
