@@ -14,5 +14,23 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url("/img/2background.jpg");
+    background-size: cover;
 }
+
+.mainTable{
+    display:flex;
+    flex-direction:row;
+}
+
+.secBackground {
+    height: 100%;
+    
+    height: auto;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+}
+

@@ -77,7 +77,15 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
            
             //string result = "";
             dynamic weather = JsonConvert.DeserializeObject(body);
-            List<string> results = new List<string>();
+
+            List<WeatherDay> results = new List<WeatherDay>();
+
+            foreach (var day in weather.days)
+            { 
+                var weatherDay = new WeatherDay(day);
+                results.Add(weatherDay);
+               
+ List<string> results = new List<string>();
            
 
             foreach (var day in weather.days)
@@ -114,6 +122,7 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
                 results.Add("Longitude: " + weather.stations[stationID].longitude);
                 results.Add("Quality: " + weather.stations[stationID].quality);
                 results.Add(" ");
+
             }
 
             //dynamic severe = JsonConvert.DeserializeObject(body);
