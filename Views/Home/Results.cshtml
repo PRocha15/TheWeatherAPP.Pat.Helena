@@ -4,12 +4,16 @@
 }
 
 <div class="text-center">
-    <h1 class="text-light">@Model.LocationName</h1>
-    </br>
+    
     @{
         WeatherResult data = ViewBag.Output;
     }
-
+    <div>
+        <img class="locationImage" src="@data.ImageLink" alt="@Model.LocationName"" />
+        <h1 class="text-light">@Model.LocationName</h1>
+        
+    </div>
+    </br>
     <!-- ALERTS-->
     <div class="alertSpacing">
         @{

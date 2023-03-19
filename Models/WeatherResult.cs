@@ -10,17 +10,21 @@ namespace TheWeatherAPP.Pat.Helena.Models
         public List<WeatherStation> Stations { get; set; }
         public List<WeatherDay> Days { get; set; }
 
+        public string ImageLink { get; set; }
+
         public WeatherResult(dynamic response) {
-        
+
             this.Alerts = new List<WeatherAlert>();
-            this.Days= new List<WeatherDay>();
+            this.Days = new List<WeatherDay>();
             this.Stations = new List<WeatherStation>();
 
             //alerts
-            foreach(var alert in response.alerts) 
-            {
-                var alertItem = new WeatherAlert(alert);
-                this.Alerts.Add(alertItem);
+            if (response.alerts != null) { 
+                foreach (var alert in response.alerts)
+                {
+                    var alertItem = new WeatherAlert(alert);
+                    this.Alerts.Add(alertItem);
+                }
             }
 
             // weather per day

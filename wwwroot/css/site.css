@@ -90,3 +90,8 @@ body {
 .iconSpacing{
     height:140px;
 }
+
+.locationImage{
+    width:150px;
+    margin-bottom:20px;
+}
