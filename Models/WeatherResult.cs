@@ -33,7 +33,7 @@ namespace TheWeatherAPP.Pat.Helena.Models
 
 
             // stations
-            if(response.currentConditions != null && response.currentconditions.stations != null){
+            if(response.currentConditions != null && response.currentConditions.stations != null){
                 foreach (string stationId in response.currentConditions.stations)
                 {
                     var station = new WeatherStation(response.stations[stationId]);

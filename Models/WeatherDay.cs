@@ -49,13 +49,13 @@
             this.Humidity= data.humidity;
             this.Precipitation = data.precip;
             this.PrecipitationProbability = data.precipprob;
-            this.Snow = data.snow;
+            this.Snow = data.snow != null ? data.snow : 0;
             this.WindSpeed = data.windspeed;
             this.WindDireciton = data.winddir;
             this.Pressure = data.pressure;
             this.CloudCover = data.cloudcover;
             this.Visibility = data.visibility;
-            this.UVIndex= data.uvindex;
+            this.UVIndex= data.uvindex != null ? data.uvindex : 0;
             this.SunRise= data.sunrise;
             this.SunSet= data.sunset;
             this.MoonPhase= data.moonphase;

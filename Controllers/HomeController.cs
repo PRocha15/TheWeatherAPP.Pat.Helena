@@ -60,7 +60,7 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
         {
 
             //Check the intended period
-            string API_URL;
+            string API_URL="";
             switch (wm.Period)
             {
                 case "Today":
@@ -72,8 +72,8 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
                 case "Next 7 days":
                     API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/next7days?iconSet=icons2&unitGroup=metric&key=9ML3SDK9ZECE68356PEA4G45V&contentType=json";
                     break;
-                default: //next 15 days
-                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "?iconSet=icons2&unitGroup=metric&key=9ML3SDK9ZECE68356PEA4G45V&contentType=json";
+                case "Next 15 days": //next 15 days
+                    API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/next15days?iconSet=icons2&unitGroup=metric&key=9ML3SDK9ZECE68356PEA4G45V&contentType=json";
                     break;
             }
             //HTTP request CALL API
