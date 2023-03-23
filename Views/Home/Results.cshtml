@@ -91,8 +91,9 @@
           
 
      </div>
-       
 
+    @if(data.Stations.Count!=0)
+    {
      <!-- ACCORDION-->
      <div class="stationSpacing">
         <hr class="bg-light" />
@@ -133,5 +134,14 @@
         </div>
 
     </div>
+    }
+    else
+    {
+        <div class="alert alert-primary" role="alert">
+            <div class="d-flex justify-content-between flex-wrap">
+                <span>Não existem dados sobre as estações</span>
+            </div>
+        </div>
+    }
      
 </div>

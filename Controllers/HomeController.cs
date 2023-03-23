@@ -103,7 +103,7 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
                 Console.WriteLine(ex.Message);
             }
            
-            // Parese Visual Crossing Response for View Model
+            // Parse Visual Crossing Response for View Model
             WeatherResult weatherResult = new WeatherResult(responseJSON);
 
 
@@ -131,7 +131,7 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
                 Console.WriteLine(ex.Message);
             }
 
-            // parese response to obtain image
+            // parse response to obtain image
             var results = responseJSON.results;
             foreach (var result in results)
             {

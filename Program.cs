@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using TheWeatherAPP.Pat.Helena.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<TheWeatherAPPPatHelenaContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TheWeatherAPPPatHelenaContext") ?? throw new InvalidOperationException("Connection string 'TheWeatherAPPPatHelenaContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
