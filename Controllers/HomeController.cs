@@ -1,21 +1,25 @@
 ﻿using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Net.Mime;
+using TheWeatherAPP.Pat.Helena.Data;
 using TheWeatherAPP.Pat.Helena.Models;
 
 namespace TheWeatherAPP.Pat.Helena.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly TheWeatherAPPPatHelenaContext _context;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, TheWeatherAPPPatHelenaContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -35,9 +39,13 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
             return View("Main", wm);
         }
 
-        public IActionResult Validation(string email, string password)
+        public async Task<IActionResult> Validation(string email, string password)
         {
-            if (email == "superMan@super.com" && password == "123")
+            // query database for user
+            List<Users> users = await _context.Users.ToListAsync();
+            List<Users> validUsers = users.FindAll(user => user.Email == email && user.Password == password);
+
+            if (validUsers.Count > 0)
             {   
                 Weather wm = new Weather();
                 wm.period = "Today";
@@ -45,7 +53,7 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
             }
             else
             {
-                ViewData["auth_error"] = "Por favor introduza as suas credenciais";
+                ViewData["auth_error"] = "User or password invalid";
                 return View("Index");
 
             }
@@ -165,6 +173,23 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        // Create User
+        public async Task<IActionResult> CreateUser([Bind("ID,FirstName,LastName,Gender,Birthdate,Email,PhoneNumber,Password")] Users users)
+        {
+            if (ModelState.IsValid) /*copiar controlador botao submit -*/
+            {
+                _context.Add(users);
+                await _context.SaveChangesAsync();
+
+                Weather wm = new Weather();
+                wm.period = "Today";
+                return View("Main", wm);
+                
+            }
+            return View("CreateAccount");
         }
     }
 }

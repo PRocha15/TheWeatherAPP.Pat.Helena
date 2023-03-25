@@ -45,7 +45,7 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
             return View(users);
         }
 
-        // GET: Users/Create
+        // GET: Users/Create 
         public IActionResult Create()
         {
             return View();
@@ -56,9 +56,9 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Gender,Birthdate,Email,PhoneNumber")] Users users)
+        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Gender,Birthdate,Email,PhoneNumber,Password")] Users users)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) /*copiar controlador botao submit -*/
             {
                 _context.Add(users);
                 await _context.SaveChangesAsync();
@@ -88,7 +88,7 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,Gender,Birthdate,Email,PhoneNumber")] Users users)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,Gender,Birthdate,Email,PhoneNumber,Password")] Users users)
         {
             if (id != users.ID)
             {

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TheWeatherAPP.Pat.Helena.Models.Users
+@{
     ViewData["Title"] = "Create Account";
     Layout = "~/Views/Shared/_Authentication.cshtml";
 }
@@ -9,22 +10,25 @@
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                     <div class="card-body p-4 p-md-5">
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
-                        <form>
+                        <form class="needs-validation" asp-action="CreateUser">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-4">
 
                                     <div class="form-outline">
-                                        <input type="text" id="firstName" class="form-control form-control-lg" />
-                                        <label class="form-label" for="firstName">First Name</label>
+                                        <input asp-for="FirstName" type="text" id="firstName" class="form-control form-control-lg" required/>
+                                        <label asp-for="FirstName" class="form-label" for="firstName">First Name</label>
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
                                     </div>
 
                                 </div>
                                 <div class="col-md-6 mb-4">
 
                                     <div class="form-outline">
-                                        <input type="text" id="lastName" class="form-control form-control-lg" />
-                                        <label class="form-label" for="lastName">Last Name</label>
+                                        <input asp-for="LastName" type="text" id="lastName" class="form-control form-control-lg" required />
+                                        <label asp-for="LastName" class="form-label" for="lastName">Last Name</label>
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
                                     </div>
 
                                 </div>
@@ -34,8 +38,9 @@
                                 <div class="col-md-6 mb-4 d-flex align-items-center">
 
                                     <div class="form-outline datepicker w-100">
-                                        <input type="text" class="form-control form-control-lg" id="birthdayDate" />
-                                        <label for="birthdayDate" class="form-label">Birthday</label>
+                                        <input asp-for="Birthdate" type="date" class="form-control form-control-lg" id="birthdayDate" required />
+                                        <label asp-for="Birthdate" for="birthdayDate" class="form-label">Birthday</label>
+                                        <span asp-validation-for="Birthdate" class="text-danger"></span>
                                     </div>
 
                                 </div>
@@ -45,19 +50,19 @@
 
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
-                                               value="option1" checked />
+                                               value="F" checked />
                                         <label class="form-check-label" for="femaleGender">Female</label>
                                     </div>
 
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
-                                               value="option2" />
+                                               value="M" />
                                         <label class="form-check-label" for="maleGender">Male</label>
                                     </div>
 
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
-                                               value="option3" />
+                                               value="O" />
                                         <label class="form-check-label" for="otherGender">Other</label>
                                     </div>
 
@@ -68,21 +73,61 @@
                                 <div class="col-md-6 mb-4 pb-2">
 
                                     <div class="form-outline">
-                                        <input type="email" id="emailAddress" class="form-control form-control-lg" />
-                                        <label class="form-label" for="emailAddress">Email</label>
+                                        <input asp-for="Email" type="email" id="emailAddress" class="form-control form-control-lg" required />
+                                        <label asp-for="Email" class="form-label" for="emailAddress">Email</label>
+                                        <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
 
                                 </div>
                                 <div class="col-md-6 mb-4 pb-2">
 
                                     <div class="form-outline">
-                                        <input type="tel" id="phoneNumber" class="form-control form-control-lg" />
-                                        <label class="form-label" for="phoneNumber">Phone Number</label>
+                                        <input asp-for="PhoneNumber" type="tel" id="phoneNumber" class="form-control form-control-lg" required />
+                                        <label asp-for="PhoneNumber" class="form-label" for="phoneNumber">Phone Number</label>
+                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                <div class="col-md-6 mb-4 pb-2">
+
+         <div class="form-outline">
+                                        <input asp-for="Password" type="password" id="password" class="form-control form-control-lg" required />
+                                        <label asp-for="Password" class="form-label" for="password">Password</label>
+                                            <span asp-validation-for="Password" class="text-danger confirm-message"></span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 mb-4 pb-2">
+
+                                    <div class="form-outline">
+                                        <input type="password" id="confirmpassword" class="form-control form-control-lg" required />
+                                        <label class="form-label" for="phoneNumber">Confirm Password</label>
+           
                                     </div>
 
                                 </div>
                             </div>
+                            </div>
+                                <!-- from https://impulsivecode.com/validate-password-and-confirm-password-using-jquery/?utm_content=cmp-true -->
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                                <script>
+                                    $('#password, #confirmpassword').on('keyup', function () {
 
+                                        $('.confirm-message').removeClass('success-message').removeClass('error-message');
+
+                                        let password = $('#password').val();
+                                        let confirm_password = $('#confirmpassword').val();
+
+                                        if (confirm_password === password) {
+                                            $('.confirm-message').text('');
+                                        }
+                                        else {
+                                            $('.confirm-message').text("Password Doesn't Match!");
+                                        }
+
+                                    });
+                                </script>
                            
 
                             <div class="mt-4 pt-2">
