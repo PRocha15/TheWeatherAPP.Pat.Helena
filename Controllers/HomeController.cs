@@ -27,11 +27,6 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         public IActionResult Main()
         {
             Weather wm = new Weather();
