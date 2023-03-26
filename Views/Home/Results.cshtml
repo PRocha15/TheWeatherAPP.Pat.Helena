@@ -8,45 +8,98 @@
     @{
         WeatherResult data = ViewBag.Output;
     }
-    <div>
-        <img class="locationImage" src="@data.ImageLink" alt="@Model.LocationName"" />
-        <h1 class="text-light">@Model.LocationName</h1>
-        
-    </div>
-    </br>
+
     <!-- ALERTS-->
     <div class="alertSpacing">
         @{
             for (int i = 0; i < data.Alerts.Count; i++)
             {
                 WeatherAlert alert = data.Alerts[i];
-            
-            <div class="alert alert-primary" role="alert">
-                <div class="d-flex justify-content-between flex-wrap">
-                    <span>@alert.Headline</span>
+
+                <div class="alert alert-primary" role="alert">
+                    <div class="d-flex justify-content-between flex-wrap">
+                        <span>@alert.Headline</span>
                         <button class="btn btn-outline-primary seeMoreSpacing" type="button" data-bs-toggle="collapse" data-bs-target="#alert@(i)" aria-expanded="false" aria-controls="alert@(i)">
-                        See more
-                    </button>
-                </div>
+                            See more
+                        </button>
+                    </div>
 
                     <div class="collapse" id="alert@(i)">
-                    <div class="card card-body" style="background-color: transparent; margin-top:15px">
-                        @alert.Description
+                        <div class="card card-body" style="background-color: transparent; margin-top:15px">
+                            @alert.Description
+                        </div>
                     </div>
                 </div>
-            </div>
-           
 
+
+            }
         }
-    }
     </div>
-    
-    
+
+    <!-- Header - Title and image -->
+   
 
 
     <!-- CARDS-->
 
     <div class="d-flex justify-content-around flex-wrap ">
+        
+             <div class="card cardSpacing" style="width: 18rem;">
+                    <div class="card-header cardDate">
+                @Model.LocationName
+               </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" style="padding:0px">
+                        <img class="locationImage" src="@data.ImageLink" alt="@Model.LocationName" style="width: 100%" />
+                        <!-- ACCORDION-->
+                        <div class="stationSpacing">
+                            <hr class="bg-light" />
+                            
+                            @if (data.Stations.Count != 0)
+                            {
+                                <h4>Stations Information</h4>
+                            }
+                            else
+                            {
+                                <h4>Stations Information Unavailable</h4>
+                            }
+                            <div class="accordion accordionSpacing" id="accordionExample">
+                                @{
+                                    foreach (WeatherStation station in data.Stations)
+                                    {
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="heading@(station.Id)">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse@(station.Id)" aria-expanded="false" aria-controls="collapse@(station.Id)">
+                                                    @station.Name
+                                                </button>
+                                            </h2>
+                                            <div id="collapse@(station.Id)" class="accordion-collapse collapse" aria-labelledby="heading@(station.Id)" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="d-flex justify-content-between flex-wrap">
+                                                        <div style="text-align:left">
+                                                            <p><strong>Latitude: </strong>@station.Latitude</p>
+                                                            <p><strong>Longitude: </strong>@station.Longitude</p>
+
+                                                        <p><strong>Distance: </strong>@(station.Distance) Km</p>
+                                                        <p><strong>Quality: </strong>@station.Quality</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
+
+                            </div>
+
+                        </div>
+                    </li>
+                    </ul>
+
+
+        </div>
         
         @{
             foreach(WeatherDay day in data.Days)
@@ -92,56 +145,9 @@
 
      </div>
 
-    @if(data.Stations.Count!=0)
-    {
-     <!-- ACCORDION-->
-     <div class="stationSpacing">
-        <hr class="bg-light" />
-        <h2 class="text-light">Stations Information</h2>
-
-        <div class="accordion accordionSpacing" id="accordionExample">
-            @{
-                foreach(WeatherStation station in data.Stations)
-                {
-                    <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading@(station.Id)">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse@(station.Id)" aria-expanded="false" aria-controls="collapse@(station.Id)">
-                            @station.Name
-                        </button>
-                    </h2>
-                        <div id="collapse@(station.Id)" class="accordion-collapse collapse" aria-labelledby="heading@(station.Id)" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                                <div class="d-flex justify-content-between flex-wrap">
-                                <div style="text-align:left">
-                                        <p><strong>Latitude: </strong>@station.Latitude</p>
-                                        <p><strong>Longitude: </strong>@station.Longitude</p>
-                                </div>
-                                <div>
-                                    <strong>Distance: </strong>@(station.Distance) Km
-                                </div>
-                                    <div>
-                                        <strong>Quality: </strong>@station.Quality
-                                    </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                }
-            }
-            
-            
-        </div>
-
-    </div>
-    }
-    else
-    {
-        <div class="alert alert-primary" role="alert">
-            <div class="d-flex justify-content-between flex-wrap">
-                <span>Não existem dados sobre as estações</span>
-            </div>
-        </div>
-    }
+    
+     
+    
+   
      
 </div>

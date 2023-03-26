@@ -12,7 +12,7 @@ namespace TheWeatherAPP.Pat.Helena.Models
 
         public string ImageLink { get; set; }
 
-        public WeatherResult(dynamic response) {
+        public WeatherResult(dynamic response, dynamic imageResponse) {
 
             this.Alerts = new List<WeatherAlert>();
             this.Days = new List<WeatherDay>();
@@ -46,6 +46,22 @@ namespace TheWeatherAPP.Pat.Helena.Models
 
             }
 
+            // image 
+            List<string> imageLinks = new List<string>();
+            var results = imageResponse.results;
+
+            foreach (var result in results)
+            {
+                if (result.urls.thumb != null)
+                {
+                    imageLinks.Add(result.urls.thumb.ToString());
+                }
+            }
+            
+            if (imageLinks.Count > 0)
+            {
+                this.ImageLink = imageLinks[new Random().Next(imageLinks.Count)];
+            }
 
 
         }

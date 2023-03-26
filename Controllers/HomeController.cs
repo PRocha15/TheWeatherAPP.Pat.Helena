@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Net.Mime;
+using System.Security.Policy;
 using TheWeatherAPP.Pat.Helena.Data;
 using TheWeatherAPP.Pat.Helena.Models;
 
@@ -80,80 +81,29 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
                     API_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + wm.LocationName + "/next15days?iconSet=icons2&unitGroup=metric&key=9ML3SDK9ZECE68356PEA4G45V&contentType=json";
                     break;
             }
-            
-            //HTTP request CALL API Visual Crossing
-            var client = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Get, API_URL);
-            var response = await client.SendAsync(request);
-            if (!response.IsSuccessStatusCode)
-            {
-                // in case of error show error page
-                ErrorViewModel errorModel = new ErrorViewModel();
-                return View("Error", errorModel);
-            }
-            
-            var body = await response.Content.ReadAsStringAsync();
 
-            //string result = "";
-            bool error = true;
-            dynamic responseJSON = null;
-            try
-            {
-                responseJSON = JsonConvert.DeserializeObject(body);
-                error = false;
-            } catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-           
-            // Parse Visual Crossing Response for View Model
-            WeatherResult weatherResult = new WeatherResult(responseJSON);
+            //request visual crossing
+            dynamic responseJSON = await requestAPI(API_URL);
+            bool error = responseJSON == null;
 
-
-            //Image API HTTP request
-            client = new HttpClient();
-            // async wait get image api
-            string imageLink = null;
-            string imageAPI = "https://api.unsplash.com/search/photos?page=1&query=" + wm.locationName.ToLower() + "&client_id=0hyxSmBqyWQc8Cw1AsayLABdynhWpRgbtFEwS21TKEE";
-            request = new HttpRequestMessage(HttpMethod.Get, imageAPI);
-            response = await client.SendAsync(request);
-            if (!response.IsSuccessStatusCode)
-            {
-                // in case of error show error page
-                ErrorViewModel errorModel = new ErrorViewModel();
-                return View("Error", errorModel);
-            }
-            body = await response.Content.ReadAsStringAsync();
-            responseJSON = null;
-            try
-            {
-                responseJSON = JsonConvert.DeserializeObject(body);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            // parse response to obtain image
-            var results = responseJSON.results;
-            foreach (var result in results)
-            {
-                imageLink = result.urls.thumb;
-                break;
-            }
-
-
-
-
-            weatherResult.ImageLink = imageLink;
-            ViewBag.Output = weatherResult;
 
             // in case of error show error page
             if (error)
             {
                 ErrorViewModel errorModel = new ErrorViewModel();
+                errorModel.Title = "Something went wrong";
+                errorModel.Description = "We could not satisfy your request. Please verify if you have inserted a correct location.";
                 return View("Error", errorModel);
-            } 
+            }
+
+            // image api request
+            string imageAPI_URL = "https://api.unsplash.com/search/photos?page=1&query=" + wm.locationName.ToLower() + "&client_id=0hyxSmBqyWQc8Cw1AsayLABdynhWpRgbtFEwS21TKEE";
+            dynamic imageResponseJSON = await requestAPI(imageAPI_URL);
+            
+
+            // Parse Visual Crossing and Image Response for View Model
+            WeatherResult weatherResult = new WeatherResult(responseJSON, imageResponseJSON);
+            ViewBag.Output = weatherResult;
                         
             return View("Results", wm);
         }
@@ -185,6 +135,30 @@ namespace TheWeatherAPP.Pat.Helena.Controllers
                 
             }
             return View("CreateAccount");
+        }
+
+        public async Task<dynamic> requestAPI(string url)
+        {
+            //HTTP request CALL API Visual Crossing
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            var response = await client.SendAsync(request);
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            var body = await response.Content.ReadAsStringAsync();
+            dynamic responseJSON = null;
+            try
+            {
+                responseJSON = JsonConvert.DeserializeObject(body);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return responseJSON;
         }
     }
 }
