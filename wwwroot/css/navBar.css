@@ -1,0 +1,47 @@
+﻿.navBarTitle {
+    font-size: 26px;
+}
+
+.signOutButton {
+    font-size: 20px;
+}
+.createAccountButton {
+    font-size: 20px;
+}
+
+.navBarItem {
+    font-size: 20px;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #631b82;
+    border-color: #943cba; /*set the color you want here*/
+}
+
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+        color: #fff;
+        background-color: #943cba;
+        border-color: #943cba; /*set the color you want here*/
+    }
+
+.btn-outline-primary {
+    color: #943cba;
+    border-color: #943cba; /*set the color you want here*/
+}
+
+    .btn-outline-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+        color: #fff;
+        background-color: #943cba;
+        border-color: #943cba; /*set the color you want here*/
+    }
+
+.btn-outline-light {
+    border-width: 2px; /*set the color you want here*/
+    color: #f8f9fa;
+    border-color: #f8f9fa;
+    font-size: 20px;
+}
+.form-check-input:checked {
+    background-color: #631b82;
+    border-color: #631b82;
+}

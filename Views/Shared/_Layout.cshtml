@@ -6,13 +6,14 @@
     <title>@ViewData["Title"] - TheWeatherAPP.Pat.Helena</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/navBar.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TheWeatherAPP.Pat.Helena.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Main">PatLena Forecast</a>
+                <a class="navbar-brand navBarTitle" asp-area="" asp-controller="Home" asp-action="Main">PatLena Forecast</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,12 +21,12 @@
                 <div class="navbar-collapse collapse justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Main">Home</a>
+                            <a class="nav-link text-light navBarItem" asp-area="" asp-controller="Home" asp-action="Main">Home</a>
                         </li>
                     </ul>
                 </div>
                 <form class="form-inline">
-                    <a class="btn btn-outline-light" style="white-space: normal;" asp-controller="Home" asp-action="Index">Sign Out</a>
+                    <a class="btn btn-outline-light signOutButton" style="white-space: normal;" asp-controller="Home" asp-action="Index">Sign Out</a>
                 </form>
             </div>
         </nav>

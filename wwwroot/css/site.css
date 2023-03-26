@@ -15,7 +15,7 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-image: url("/img/2background.jpg");
+    background-image: url("/img/BackMain.png");
     background-size: cover;
 }
 
@@ -36,15 +36,22 @@ body {
 
 .searchBar {
     margin-top: 160px;
+    height:50px;
+   
+}
+.searchButton{
+    font-size:20px;
 }
 .radioButtonsGroup {
     margin-top:30px;
+    font-size:22px;
 }
 .radioButtonsText{
     font-size: 18px;
 }
 .radioButtonItem{
     margin-right: 25px;
+    
 }
 
 .alertSpacing{
@@ -82,10 +89,10 @@ body {
     margin-top:20px;
 }
 .cardDate {
-    background-color: #715382;
+    background-color: purple;
     color: white;
     font-weight:600;
-    font-size:17px;
+    font-size:20px;
 }
 .iconSpacing{
     height:140px;
@@ -95,3 +102,12 @@ body {
     width:150px;
     margin-bottom:20px;
 }
+
+
+
+
+.form-check-input:checked {
+    background-color: #631b82;
+    border-color: #631b82;
+}
+     

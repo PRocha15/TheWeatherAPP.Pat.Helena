@@ -1,12 +1,13 @@
 ﻿html {
 	position: relative;
 	min-height: 100%;
+	
 }
 body {
 	
-	background-image: url("/img/indexBack.png");
+	background-image: url("/img/indexBack1.png");
 	background-size:cover;
-	
+		
 }
 
 
@@ -22,9 +23,11 @@ span {
 
 .signinField{
 	margin-top:10px
+	
 }
 
 .signinButton{
 	margin-top:20px;
-
+	background-color:purple;
 }
+
