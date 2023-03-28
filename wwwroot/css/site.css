@@ -15,8 +15,10 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-image: url("/img/BackMain.png");
+    background-image: url("/img/BackMainVertical.png");
     background-size: cover;
+    max-width:100%;
+    height:auto;
 }
 
 .mainTable{
@@ -111,3 +113,7 @@ body {
     border-color: #631b82;
 }
      
+.table{
+    color:white;
+    
+}

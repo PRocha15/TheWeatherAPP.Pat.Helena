@@ -1,0 +1,41 @@
+﻿@model TheWeatherAPP.Pat.Helena.Models.Users
+@{
+    ViewData["Title"] = "Adm.";
+    Layout = "~/Views/Shared/_Authentication.cshtml";
+}
+<main>
+    <form asp-action="Validation">
+
+        <div class="container d-flex justify-content-around flex-wrap">
+            <div class="signinForm">
+                <div class="text-black" style="font-size:20px">
+                    Sign in with your email address
+                </div>
+                <div class="form-floating">
+                    <input type="email" class="form-control signinField" id="floatingInput" name="email" placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control signinField" id="floatingPassword" name="password" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                </div>
+
+
+
+
+                @if (ViewData["auth_error"] != null)
+                {
+                    <div class="alert-danger"><label>@ViewData["auth_error"]</label></div>
+
+                    <br />
+                }
+
+                <button class="w-100 btn btn-lg btn-primary signinButton" type="submit">Sign in</button>
+            </div>
+
+
+        </div>
+
+    </form>
+</main>
+

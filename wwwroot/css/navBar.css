@@ -3,10 +3,10 @@
 }
 
 .signOutButton {
-    font-size: 20px;
+    font-size: 16px;
 }
 .createAccountButton {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .navBarItem {
@@ -39,7 +39,7 @@
     border-width: 2px; /*set the color you want here*/
     color: #f8f9fa;
     border-color: #f8f9fa;
-    font-size: 20px;
+    font-size: 18px;
 }
 .form-check-input:checked {
     background-color: #631b82;
